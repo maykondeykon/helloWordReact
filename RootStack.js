@@ -1,9 +1,14 @@
-import { createStackNavigator } from 'react-navigation';
+import React from 'react';
+import {
+    Text,
+    View
+  } from 'react-native';
+import { createDrawerNavigator, DrawerItems } from 'react-navigation';
 
 import DetailsScreen from './DetailsScreen';
 import HomeScreen from './HomeScreen';
 
-export default RootStack = createStackNavigator(
+export default RootStack = createDrawerNavigator(
     {
         Home: {
             screen: HomeScreen,
@@ -11,8 +16,13 @@ export default RootStack = createStackNavigator(
         Details: {
             screen: DetailsScreen,
         },
-    },
-    {
-        initialRouteName: 'Home',
+    },{
+        contentComponent: (props) => (
+            <View>
+                <Text>Custom Header</Text>
+                <DrawerItems {...props} />
+                <Text>Custom Footer</Text>
+                </View>
+        )
     }
     );

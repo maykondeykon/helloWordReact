@@ -1,24 +1,47 @@
 import React from 'react';
-import { Button, View, Text } from 'react-native';
+import { Image, StyleSheet } from 'react-native';
+import {
+  Container,
+  Header,
+  Button,
+  Text,
+  Icon,
+  Right
+} from "native-base";
+
+const styles = StyleSheet.create({
+  icon: {
+    width: 24,
+    height: 24,
+  },
+});
 
 export default class DetailsScreen extends React.Component {
+  static navigationOptions = {
+    drawerLabel: 'Details',
+    drawerIcon: ({ tintColor }) => (
+      <Image
+        source={require('./notif-icon.png')}
+        style={[styles.icon, {tintColor: tintColor}]}
+      />
+    ),
+  };
+
     render() {
       return (
-        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-          <Text>Details Screen</Text>
-          <Button
-            title="Go to Details... again"
-            onPress={() => this.props.navigation.push('Details')}
-          />
-          <Button
-            title="Go to Home"
-            onPress={() => this.props.navigation.navigate('Home')}
-          />
-          <Button
-            title="Go back"
-            onPress={() => this.props.navigation.goBack()}
-          />
-        </View>
+        <Container>
+        <Header>
+          <Right>
+            <Button
+              transparent
+              onPress={() => this.props.navigation.openDrawer()}>
+              <Icon active name="menu" />
+            </Button>
+          </Right>
+        </Header>
+
+      <Text>Details</Text>
+      </Container>
       );
     }
   }
